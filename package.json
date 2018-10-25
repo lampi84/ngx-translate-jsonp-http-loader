@@ -1,0 +1,35 @@
+{
+  "name": "ngx-translate-jsonp-loader",
+  "version": "1.0.0",
+  "description": "Load ngx-translate files form another domain without CORS problems",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "npm run clean && tsc",
+    "watch": "npm run clean && tsc --watch",
+    "clean": "rm -rf ./dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lampi84/ngx-translate-jsonp-http-loader.git"
+  },
+  "author": "Patric Lambrecht <lampi84>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lampi84/ngx-translate-jsonp-http-loader/issues"
+  },
+  "homepage": "https://github.com/lampi84/ngx-translate-jsonp-http-loader#readme",
+  "devDependencies": {
+    "@angular/common": "^7.0.1",
+    "@angular/core": "^7.0.1",
+    "@angular/platform-browser": "^7.0.1",
+    "@ngx-translate/core": "^11.0.0",
+    "rxjs": "^6.3.3",
+    "typescript": "^3.1.3",
+    "zone.js": "^0.8.26"
+  },
+  "peerDependencies": {
+    "@angular/common": "^7.0.1",
+    "@angular/core": "^7.0.1",
+    "@ngx-translate/core": "^11.0.0"
+  }
+}

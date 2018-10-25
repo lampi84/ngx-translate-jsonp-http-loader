@@ -1,0 +1,11 @@
+# IDE
+.vscode
+
+# Compiled files
+dist
+
+# Dependency directory
+node_modules
+
+# Source maps for JS builds
+*.js.map
