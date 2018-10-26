@@ -8,7 +8,7 @@ Load `ngx-translate` language files from another domain without CORS problem
 
 ```
 npm i @ngx-translate/core --save
-npm i ngx-translate-jsonp-http-loader --save
+npm i ngx-translate-jsonp-loader --save
 ```
 
 ## Usage:
