@@ -3,7 +3,7 @@ import { TranslateLoader } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-export class TranslatePoHttpLoader implements TranslateLoader {
+export class TranslateJsonLoader implements TranslateLoader {
   /**
    * Translation domain
    */
@@ -22,6 +22,11 @@ export class TranslatePoHttpLoader implements TranslateLoader {
   public getTranslation(lang: string): Observable<any> {
     return this._http
       .jsonp(`${this._path}/${lang}${this._suffix}`, 'callback')
-      .pipe(map((contents: string) => contents));
+      .pipe(
+        map((contents: JSON) => {
+          console.log(contents);
+          return contents;
+        })
+      );
   }
 }
