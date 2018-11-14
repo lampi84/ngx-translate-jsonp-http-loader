@@ -16,24 +16,16 @@ npm i ngx-translate-jsonp-loader --save
 Adjustments in the app.module.ts
 
 ```ts
-import {
-  HttpClient,
-  HttpClientModule,
-  HttpClientJsonpModule
-} from '@angular/common/http';
-
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { TranslatePoHttpLoader } from '@biesbjerg/ngx-translate-po-http-loader';
+import { TranslateJsonLoader } from 'ngx-translate-jsonp-loader';
 
 export function createTranslateLoader(http: HttpClient) {
-  return new TranslateJsonLoader(http, 'assets/i18n', '.js');
+  return new TranslateJsonLoader('assets/i18n', '.js');
 }
 
 @NgModule({
   imports: [
     BrowserModule,
-    HttpClientModule,
-    HttpClientJsonpModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -47,11 +39,14 @@ export function createTranslateLoader(http: HttpClient) {
 export class AppModule {}
 ```
 
-The callback function `ng_jsonp_callback_0` needs to be added to the language translation files in the i18n folder
+The callback function `ngxTranslateCallback` needs to be added to the language translation files in the i18n folder.
 
 ```js
-ng_jsonp_callback_0({
+ngxTranslateCallback({
   title: 'this is my title',
   'btn-text': 'click here'
 });
 ```
+
+If you have more than one angular app on one page the callback function can be namespaced by providing a namespace as third parameter in constructor.
+This will require to adjust the language files according to the namespace `ngxTranslateCallback` function becomes `[ your namespace ]Callback`.

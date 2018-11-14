@@ -1,7 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { TranslateLoader } from '@ngx-translate/core';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, BehaviorSubject } from 'rxjs';
 
 export class TranslateJsonLoader implements TranslateLoader {
   /**
@@ -9,9 +7,9 @@ export class TranslateJsonLoader implements TranslateLoader {
    */
 
   constructor(
-    protected _http: HttpClient,
     protected _path: string = './assets/i18n',
-    protected _suffix: string = '.js'
+    protected _suffix: string = '.js',
+    protected _namespace: string = 'ngxTranslate'
   ) {}
 
   /**
@@ -20,13 +18,21 @@ export class TranslateJsonLoader implements TranslateLoader {
    * @returns {any}
    */
   public getTranslation(lang: string): Observable<any> {
-    return this._http
-      .jsonp(`${this._path}/${lang}${this._suffix}`, 'callback')
-      .pipe(
-        map((contents: JSON) => {
-          console.log(contents);
-          return contents;
-        })
-      );
+    let translationReturn = new BehaviorSubject<any>('');
+
+    // Setup a callback function
+    window[this._namespace + 'Callback'] = translations => {
+      translationReturn.next(translations);
+    };
+
+    // Insert script
+    const translationScript = document.createElement('script');
+    translationScript.setAttribute(
+      'src',
+      `${this._path}/${lang}${this._suffix}`
+    );
+    document.head.appendChild(translationScript);
+
+    return translationReturn.asObservable();
   }
 }
