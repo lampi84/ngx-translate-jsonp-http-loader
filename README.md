@@ -19,7 +19,7 @@ Adjustments in the app.module.ts
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateJsonLoader } from 'ngx-translate-jsonp-loader';
 
-export function createTranslateLoader(http: HttpClient) {
+export function createTranslateLoader() {
   return new TranslateJsonLoader('assets/i18n', '.js');
 }
 
